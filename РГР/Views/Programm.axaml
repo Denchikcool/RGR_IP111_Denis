@@ -2,11 +2,41 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="700"
+        Width="1400" Height="700"
         MinWidth="1400" MinHeight="700"
         x:Class="РГР.Views.Programm"
         Title="Programm">
-
+  <StackPanel>
+    <Border  BorderBrush="Black" BorderThickness="3" Width="{Binding $parent[Window].Width}">
+      <Menu HorizontalAlignment="Left" Width="60" Height="50">
+        <MenuItem Header="Menu">
+          <MenuItem Header="Save current project"/>
+          <MenuItem Header="Load project"/>
+          <MenuItem Header="Exit"/>
+        </MenuItem>
+      </Menu>
+    </Border>
+      <Border BorderBrush="Black" BorderThickness="1" >
+        <WrapPanel Width="{Binding $parent[Window].Width}" Height="70">
+          <Button BorderThickness="1" BorderBrush="Black" Content="И" Height="70" Width="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+          <Button BorderThickness="1" BorderBrush="Black" Content="ИЛИ" Height="70" Width="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+          <Button BorderThickness="1" BorderBrush="Black" Content="НЕ" Height="70" Width="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+          <Button BorderThickness="1" BorderBrush="Black" Content="ИСКЛЮЧАЮЩЕЕ ИЛИ" Height="70" Width="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+          <Button BorderThickness="1" BorderBrush="Black" Content="ВХОД" Height="70" Width="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+          <Button BorderThickness="1" BorderBrush="Black" Content="ВЫХОД" Height="70" Width="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+          <Button BorderThickness="1" BorderBrush="Black" Content="ПОЛУСУММАТОР" Height="70" Width="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </WrapPanel>
+      </Border>
+    <Border BorderBrush="Black" BorderThickness="1" Width="{Binding $parent[Window].Width}">
+      <Grid ColumnDefinitions="1250, *" RowDefinitions="*, 1000" ShowGridLines="True">
+        <ItemsControl></ItemsControl>
+        <TextBox></TextBox>
+        <ListBox></ListBox>
+      </Grid>
+    </Border>
+  </StackPanel>
+  
   
   
 </Window>
