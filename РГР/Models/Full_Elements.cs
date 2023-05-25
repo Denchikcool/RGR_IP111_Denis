@@ -12,6 +12,7 @@ namespace РГР.Models
     {
         protected Avalonia.Point main_point;
         private int output1, output2;
+        private string name;
         public Avalonia.Point Main_Point
         {
             get => main_point;
@@ -30,6 +31,12 @@ namespace РГР.Models
                 }
 
             }
+        }
+
+        public string Name
+        {
+            get => name;
+            set => SetAndRaise(ref name, value);
         }
 
         public int Output1 //S

@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace РГР.Models
 {
-    public class Class_Enter : Full_Elements
+    public interface ICollectionLoader
     {
-       public Class_Enter() : base() 
-       {
-            Output1 = 0;
-       }
+        IEnumerable<Full_Elements> Load(string path);
     }
 }

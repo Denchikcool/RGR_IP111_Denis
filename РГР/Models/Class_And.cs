@@ -8,7 +8,7 @@ namespace РГР.Models
 {
     public class Class_And : Full_Elements
     {
-        public int input1, input2;
+        private int input1, input2;
 
         public int Input1
         {

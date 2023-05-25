@@ -16,6 +16,7 @@ namespace РГР.Views
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel(this);
         }
         public void Exit_programm(object sender, RoutedEventArgs eventArgs)
         {
@@ -29,58 +30,33 @@ namespace РГР.Views
 
         public void Create_Programm(object sender, RoutedEventArgs eventArgs)
         {
-            programm= new Programm();
+            programm = new Programm();
             this.Hide();
             programm.Show();
             programm.Closing += Exit_programm2;
         }
 
-        public async void OpenFile(object sender, RoutedEventArgs args)
+        public async void OpenSecondWindow(object sender, RoutedEventArgs eventArgs)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            programm = new Programm();
+            this.Hide();
+            programm.Show();
+            programm.Closing += Exit_programm2;
 
-            openFileDialog.AllowMultiple = true;
-
-            string[]? result = await openFileDialog.ShowAsync(this);
-
-            if(DataContext is MainWindowViewModel mainWindowViewModel)
-            {
-                if (result != null)
-                {
-                    mainWindowViewModel.Path = string.Join(';', result);
-                }
-                else
-                {
-                    mainWindowViewModel.Path = "Window was canceled";
-                }
-            }
-
-            //string currentpath = result;
-            //XDocument document = XDocument.Load(result);
-            //IEnumerable<Full_Elements>? files = document.Element("files")?.Elements("file").Where(file =>
-            //{
-
-            //});
+            programm.LoadFile(null, null);
 
         }
 
-        //public async void SaveFile(object sender, RoutedEventArgs args)
-        //{
-        //    SaveFileDialog saveFileDialog = new SaveFileDialog();
-
-        //    string? result = await saveFileDialog.ShowAsync(this);
-
-        //    if (DataContext is MainWindowViewModel mainWindowViewModel)
-        //    {
-        //        if (result != null)
-        //        {
-        //            mainWindowViewModel.Path = string.Join(';', result);
-        //        }
-        //        else
-        //        {
-        //            mainWindowViewModel.Path = "Window was canceled";
-        //        }
-        //    }
-        //}
+        public void ButtonClick(object sender, RoutedEventArgs eventArgs)
+        {
+            if (DataContext is MainWindowViewModel mainWindowViewModel)
+            {
+                if (sender is Button button)
+                {
+                    mainWindowViewModel.Check_button(button.Name);
+                }
+            }
+        }
+        
     }
 }

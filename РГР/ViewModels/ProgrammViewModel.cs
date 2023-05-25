@@ -1,4 +1,7 @@
-﻿using ReactiveUI;
+﻿using Avalonia.Controls;
+using Avalonia.Controls.Shapes;
+using Avalonia.Input;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -121,19 +124,53 @@ namespace РГР.ViewModels
 
         public void DeleteElement()
         {
-            System.Diagnostics.Debug.WriteLine(123123);
             ObservableCollection<Full_Elements> tempCollection = this.All_Elements;
 
             for (int i = tempCollection.Count - 1; i >= 0; i--)
             {
-                if (tempCollection[i] == this.Selected_Element)
+                if (tempCollection[i] is Class_Line tempLine)
                 {
-                    this.All_Elements.RemoveAt(i);
-                    break;
+                    if (tempLine == this.Selected_Element)
+                    {
+                        this.All_Elements.RemoveAt(i);
+                    }
+                    if (tempLine.FirstElement != null)
+                    {
+                        if (tempLine.FirstElement == this.Selected_Element)
+                        {
+                            this.All_Elements.RemoveAt(i);
+                        }
+                    }
+                    if (tempLine.SecondElement != null)
+                    {
+                        if (tempLine.SecondElement == this.Selected_Element)
+                        {
+                            this.All_Elements.RemoveAt(i);
+                        }
+                    }
+                }
+                else if (tempCollection[i] is Full_Elements tempElement)
+                {
+                    if (tempElement == this.Selected_Element)
+                    {
+                        this.All_Elements.RemoveAt(i);
+                    }
                 }
             }
         }
 
+        public void SaveCollection(string path)
+        {
+            var xmlCollectionSaver = new XML_Saver();
+            xmlCollectionSaver.Save(All_Elements, path);
+        }
+        public void LoadCollection(string path)
+        {
+            var xmlCollectionLoader = new XML_Loader();
+            All_Elements = new ObservableCollection<Full_Elements>(xmlCollectionLoader.Load(path));
+            Class_Line templines = new Class_Line();
+            templines.CheckLines(All_Elements);
+        }
 
     }
 }

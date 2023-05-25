@@ -15,14 +15,13 @@
     <KeyBinding Gesture="Delete" Command="{Binding DeleteElement}"/>
   </Window.KeyBindings>
   
-  
   <StackPanel>
     <Border  BorderBrush="Black" BorderThickness="3" Width="{Binding $parent[Window].Width}">
       <Menu HorizontalAlignment="Left" Width="60" Height="50">
         <MenuItem Header="Меню">
-          <MenuItem Header="Создать"/>
-          <MenuItem Header="Открыть"/>
-          <MenuItem Header="Сохранить"/>
+          <MenuItem Click="Create_Programm1" Header="Создать"/>
+          <MenuItem Click="LoadFile" Header="Открыть"/>
+          <MenuItem Click="SaveFile" Header="Сохранить"/>
           <MenuItem Click="Exit_programm" Header="Выйти"/>
         </MenuItem>
       </Menu>
@@ -65,7 +64,7 @@
       </Border>
     <Border BorderBrush="Black" BorderThickness="1" Width="{Binding $parent[Window].Width}">
       <Grid  ColumnDefinitions="1250, *"  RowDefinitions="1000" ShowGridLines="True">
-        <ItemsControl PointerPressed="PointerPressedOnCanvas" Items="{Binding All_Elements}"  Grid.Column="0" Grid.Row="0">
+        <ItemsControl DoubleTapped="DoubleTapOnCanvas" PointerPressed="PointerPressedOnCanvas" Items="{Binding All_Elements}"  Grid.Column="0" Grid.Row="0">
           <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
               <Canvas Name="Holst" Background="White"/>
@@ -80,7 +79,7 @@
               </views:Element_And>
             </DataTemplate>
             <DataTemplate DataType="{x:Type models:Class_Enter}">
-              <views:Element_Enter>
+              <views:Element_Enter status="{Binding Output1}">
                 <views:Element_Enter.RenderTransform>
                   <TranslateTransform X="{Binding Main_Point.X}" Y="{Binding Main_Point.Y}"/>
                 </views:Element_Enter.RenderTransform>
@@ -108,7 +107,7 @@
               </views:Element_Or>
             </DataTemplate>
             <DataTemplate DataType="{x:Type models:Class_Out}">
-              <views:Element_Out>
+              <views:Element_Out status="{Binding Input1}">
                 <views:Element_Out.RenderTransform>
                   <TranslateTransform X="{Binding Main_Point.X}" Y="{Binding Main_Point.Y}"/>
                 </views:Element_Out.RenderTransform>
@@ -122,7 +121,7 @@
               </views:Element_XoR>
             </DataTemplate>
             <DataTemplate DataType="{x:Type models:Class_Line}">
-              <Line StartPoint="{Binding StartPoint}" EndPoint="{Binding EndPoint}" Stroke="Black" StrokeThickness="1"/>
+              <Line StartPoint="{Binding StartPoint}" EndPoint="{Binding EndPoint}" Stroke="Black" StrokeThickness="2"/>
             </DataTemplate>
             
           </ItemsControl.DataTemplates>

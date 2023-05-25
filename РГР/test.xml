@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<collection>
+  <class_and>
+    <start>195, 103</start>
+    <name>element_and0</name>
+  </class_and>
+  <class_and>
+    <start>196, 217</start>
+    <name>element_and1</name>
+  </class_and>
+  <class_and>
+    <start>203, 297</start>
+    <name>element_and2</name>
+  </class_and>
+  <class_or>
+    <start>379, 164</start>
+    <name>element_or0</name>
+  </class_or>
+  <class_or>
+    <start>385, 248</start>
+    <name>element_or1</name>
+  </class_or>
+  <line>
+    <start>232, 116</start>
+    <end>391, 172</end>
+    <firstElement>РГР.Models.Class_And</firstElement>
+    <secondElement>РГР.Models.Class_Or</secondElement>
+    <name1>element_and0</name1>
+    <name2>element_or0</name2>
+  </line>
+  <line>
+    <start>233, 230</start>
+    <end>391, 189</end>
+    <firstElement>РГР.Models.Class_And</firstElement>
+    <secondElement>РГР.Models.Class_Or</secondElement>
+    <name1>element_and1</name1>
+    <name2>element_or0</name2>
+  </line>
+  <line>
+    <start>240, 312</start>
+    <end>396, 274</end>
+    <firstElement>РГР.Models.Class_And</firstElement>
+    <secondElement>РГР.Models.Class_Or</secondElement>
+    <name1>element_and2</name1>
+    <name2>element_or1</name2>
+  </line>
+</collection>

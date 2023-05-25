@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace РГР.Models
 {
-    public class Class_Enter : Full_Elements
+    public interface ICollectionSaver
     {
-       public Class_Enter() : base() 
-       {
-            Output1 = 0;
-       }
+        void Save(IEnumerable<Full_Elements> collection, string path);
     }
 }
