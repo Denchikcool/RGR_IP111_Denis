@@ -1,0 +1,103 @@
+null?xml version="1.0" encoding="utf-8"?>
+<collection>
+  <class_and>
+    <start>257, 126</start>
+    <name>element_and0</name>
+  </class_and>
+  <class_and>
+    <start>275, 275</start>
+    <name>element_and1</name>
+  </class_and>
+  <class_or>
+    <start>500, 210</start>
+    <name>element_or0</name>
+  </class_or>
+  <class_not>
+    <start>735, 198</start>
+    <name>element_not0</name>
+  </class_not>
+  <line>
+    <start>543, 226</start>
+    <end>740, 211</end>
+    <firstElement>РГР.Models.Class_Or</firstElement>
+    <secondElement>РГР.Models.Class_Not</secondElement>
+    <name1>element_or0</name1>
+    <name2>element_not0</name2>
+  </line>
+  <class_enter>
+    <start>112, 68</start>
+    <name>element_enter0</name>
+  </class_enter>
+  <class_enter>
+    <start>118, 147</start>
+    <name>element_enter1</name>
+  </class_enter>
+  <class_enter>
+    <start>124, 241</start>
+    <name>element_enter2</name>
+  </class_enter>
+  <class_enter>
+    <start>137, 326</start>
+    <name>element_enter3</name>
+  </class_enter>
+  <class_out>
+    <start>955, 157</start>
+    <name>element_out0</name>
+  </class_out>
+  <line>
+    <start>773, 211</start>
+    <end>961, 187</end>
+    <firstElement>РГР.Models.Class_Not</firstElement>
+    <secondElement>РГР.Models.Class_Out</secondElement>
+    <name1>element_not0</name1>
+    <name2>element_out0</name2>
+  </line>
+  <line>
+    <start>314, 289</start>
+    <end>511, 235</end>
+    <firstElement>РГР.Models.Class_And</firstElement>
+    <secondElement>РГР.Models.Class_Or</secondElement>
+    <name1>element_and1</name1>
+    <name2>element_or0</name2>
+  </line>
+  <line>
+    <start>294, 139</start>
+    <end>512, 218</end>
+    <firstElement>РГР.Models.Class_And</firstElement>
+    <secondElement>РГР.Models.Class_Or</secondElement>
+    <name1>element_and0</name1>
+    <name2>element_or0</name2>
+  </line>
+  <line>
+    <start>150, 97</start>
+    <end>260, 133</end>
+    <firstElement>РГР.Models.Class_Enter</firstElement>
+    <secondElement>РГР.Models.Class_And</secondElement>
+    <name1>element_enter0</name1>
+    <name2>element_and0</name2>
+  </line>
+  <line>
+    <start>159, 174</start>
+    <end>261, 152</end>
+    <firstElement>РГР.Models.Class_Enter</firstElement>
+    <secondElement>РГР.Models.Class_And</secondElement>
+    <name1>element_enter1</name1>
+    <name2>element_and0</name2>
+  </line>
+  <line>
+    <start>163, 269</start>
+    <end>279, 281</end>
+    <firstElement>РГР.Models.Class_Enter</firstElement>
+    <secondElement>РГР.Models.Class_And</secondElement>
+    <name1>element_enter2</name1>
+    <name2>element_and1</name2>
+  </line>
+  <line>
+    <start>175, 355</start>
+    <end>279, 301</end>
+    <firstElement>РГР.Models.Class_Enter</firstElement>
+    <secondElement>РГР.Models.Class_And</secondElement>
+    <name1>element_enter3</name1>
+    <name2>element_and1</name2>
+  </line>
+</collection>

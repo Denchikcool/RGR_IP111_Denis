@@ -21,6 +21,8 @@ namespace РГР.ViewModels
         private Full_Elements selected_element;
         private ObservableCollection<Class_Scheme> scheme_list;
         private string project_name;
+        private ObservableCollection<Class_Projects> all_projects;
+
 
         public int Button_Number
         {
@@ -45,6 +47,12 @@ namespace РГР.ViewModels
         {
             get => selected_element;
             set => this.RaiseAndSetIfChanged(ref selected_element, value); 
+        }
+
+        public ObservableCollection<Class_Projects> All_Projects
+        {
+            get => all_projects;
+            set => this.RaiseAndSetIfChanged(ref all_projects, value); 
         }
 
         public Class_Projects Project
@@ -253,7 +261,9 @@ namespace РГР.ViewModels
         public void SaveCollection(string path)
         {
             var xmlCollectionSaver = new XML_Saver();
+            var projectCollectionSaver = new JSON_Saver();
             xmlCollectionSaver.Save(All_Elements, path);
+            projectCollectionSaver.Save_project(All_Projects, @"..\..\..\all_proj.json");
         }
         public void LoadCollection(string path)
         {

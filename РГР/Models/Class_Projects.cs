@@ -11,12 +11,19 @@ namespace РГР.Models
     public class Class_Projects : AbstractNotifyPropertyChanged
     {
         private string project_name;
+        private string path;
         private ObservableCollection<Class_Scheme> scheme;
 
         public string Project_Name
         {
             get => project_name; 
             set => SetAndRaise(ref project_name, value);
+        }
+
+        public string Path
+        {
+            get => path;
+            set => SetAndRaise(ref path, value);
         }
 
         public ObservableCollection<Class_Scheme> Scheme
@@ -28,6 +35,7 @@ namespace РГР.Models
         public Class_Projects()
         {
             Project_Name = " ";
+            Path = " ";
             Scheme = new ObservableCollection<Class_Scheme>();
         }
     }
