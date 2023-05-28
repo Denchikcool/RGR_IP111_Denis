@@ -79,7 +79,7 @@
               </views:Element_And>
             </DataTemplate>
             <DataTemplate DataType="{x:Type models:Class_Enter}">
-              <views:Element_Enter status="{Binding Output1}">
+              <views:Element_Enter Value_El="{Binding Output}">
                 <views:Element_Enter.RenderTransform>
                   <TranslateTransform X="{Binding Main_Point.X}" Y="{Binding Main_Point.Y}"/>
                 </views:Element_Enter.RenderTransform>
@@ -107,7 +107,7 @@
               </views:Element_Or>
             </DataTemplate>
             <DataTemplate DataType="{x:Type models:Class_Out}">
-              <views:Element_Out status="{Binding Input1}">
+              <views:Element_Out Value_El="{Binding Output}">
                 <views:Element_Out.RenderTransform>
                   <TranslateTransform X="{Binding Main_Point.X}" Y="{Binding Main_Point.Y}"/>
                 </views:Element_Out.RenderTransform>
@@ -126,7 +126,29 @@
             
           </ItemsControl.DataTemplates>
         </ItemsControl>
-        
+        <ItemsControl Grid.Column="1" Grid.Row="0" DoubleTapped="DoubleTapOnCanvas2">
+
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <Canvas Name="Schemes" Background="LightGray"/>
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+
+          <StackPanel>
+            <TextBlock Text="{Binding ProjectName}"/>
+
+            <ListBox Items="{Binding Scheme_List}" SelectedIndex="{Binding Select_Scheme}">
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <TextBlock Text="{Binding Scheme_Name}"/>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Button Click="MadeScheme" BorderThickness="1" BorderBrush="Black" Content="Создать" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Button Click="DestroyScheme" BorderThickness="1" BorderBrush="Black" Content="Удалить" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+          </StackPanel>
+        </ItemsControl>
       </Grid>
     </Border>
   </StackPanel>

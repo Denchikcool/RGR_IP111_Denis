@@ -8,40 +8,30 @@ namespace РГР.Models
 {
     public class Class_HalfSum : Full_Elements
     {
-        public int input1, input2;
+        public override void Meaning()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                Outputs[i] = 0;
+            }
+            Value_El = 0;
 
-        public int Input1
-        {
-            get => input1;
-            set => SetAndRaise(ref input1, value);
-        }
-        public int Input2
-        {
-            get => input2;
-            set => SetAndRaise(ref input2, value);
-        }
+            if (Ins[0] != null && Ins[1] != null)
+            {
+                if (Ins[0].Element_of_Collection.Outputs[Ins[0].Number] == 0 && Ins[1].Element_of_Collection.Outputs[Ins[1].Number] == 1)
+                {
+                    Outputs[0] = 1;
+                }
+                else if (Ins[0].Element_of_Collection.Outputs[Ins[0].Number] == 1 && Ins[1].Element_of_Collection.Outputs[Ins[1].Number] == 0)
+                {
+                    Outputs[0] = 1;
+                }
+                else if (Ins[0].Element_of_Collection.Outputs[Ins[0].Number] == 1 && Ins[1].Element_of_Collection.Outputs[Ins[1].Number] == 1)
+                {
+                    Outputs[1] = 1;
+                }
 
-        public void Value_And()
-        {
-            if (Input1 == 0 && Input2 == 0)
-            {
-                Output1 = 0;
-                Output2 = 0;
-            }
-            else if (Input1 == 1 && Input2 == 0)
-            {
-                Output1 = 1;
-                Output2 = 0;
-            }
-            else if (Input1 == 0 && Input2 == 1)
-            {
-                Output1 = 1;
-                Output2 = 0;
-            }
-            else if (Input1 == 1 && Input2 == 1)
-            {
-                Output1 = 0;
-                Output2 = 1;
+                Value_El = 1;
             }
         }
     }

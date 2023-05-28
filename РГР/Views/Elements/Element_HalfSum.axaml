@@ -18,10 +18,10 @@
           <TextBlock Text="B" Canvas.Left="22" FontSize="8" Canvas.Top="50"/>
           <TextBlock Text="S" Canvas.Left="83" FontSize="8" Canvas.Top="40"/>
           <TextBlock Text="P0" Canvas.Left="83" FontSize="8" Canvas.Top="50"/>
-          <Ellipse Name="in1" Fill="Gray" Height="8" Width="8" Canvas.Top="40" Canvas.Left="3"/>
-          <Ellipse Name="in2" Fill="Gray" Height="8" Width="8" Canvas.Top="50" Canvas.Left="3"/>
-          <Ellipse Name="out1" Fill="Gray" Height="8" Width="8" Canvas.Top="40" Canvas.Left="99"/>
-          <Ellipse Name="out2" Fill="Gray" Height="8" Width="8" Canvas.Top="50" Canvas.Left="99"/>
+          <Ellipse Name="in0" Fill="Gray" Height="8" Width="8" Canvas.Top="40" Canvas.Left="3"/>
+          <Ellipse Name="in1" Fill="Gray" Height="8" Width="8" Canvas.Top="50" Canvas.Left="3"/>
+          <Ellipse Name="out0" Fill="Gray" Height="8" Width="8" Canvas.Top="40" Canvas.Left="99"/>
+          <Ellipse Name="out1" Fill="Gray" Height="8" Width="8" Canvas.Top="50" Canvas.Left="99"/>
         </Canvas>
       </ControlTemplate>
     </Setter>

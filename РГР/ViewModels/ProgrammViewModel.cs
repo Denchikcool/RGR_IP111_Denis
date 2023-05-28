@@ -15,8 +15,12 @@ namespace РГР.ViewModels
     public class ProgrammViewModel : ViewModelBase
     {
         private int button_number;
+        private int select_scheme;
+        private Class_Projects project;
         private ObservableCollection<Full_Elements> all_elements;
         private Full_Elements selected_element;
+        private ObservableCollection<Class_Scheme> scheme_list;
+        private string project_name;
 
         public int Button_Number
         {
@@ -26,6 +30,9 @@ namespace РГР.ViewModels
         public ProgrammViewModel()
         {
             all_elements = new ObservableCollection<Full_Elements>();
+            Project = new Class_Projects();
+            Project.Scheme.Add(new Class_Scheme());
+            All_Elements = Project.Scheme[0].Elements;
         }
 
         public ObservableCollection<Full_Elements> All_Elements
@@ -38,6 +45,43 @@ namespace РГР.ViewModels
         {
             get => selected_element;
             set => this.RaiseAndSetIfChanged(ref selected_element, value); 
+        }
+
+        public Class_Projects Project
+        {
+            get => project;
+            set => this.RaiseAndSetIfChanged(ref project, value);
+        }
+
+        public ObservableCollection<Class_Scheme> Scheme_List
+        {
+            get => Project.Scheme;
+        }
+
+        public string ProjectName
+        {
+            get => Project.Project_Name;
+        }
+
+        public int Select_Scheme
+        {
+            get => select_scheme;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref select_scheme, value);
+                if(Select_Scheme < 0)
+                {
+                    Select_Scheme = 0;
+                }
+                if(Project.Scheme.Count == 0)
+                {
+                    All_Elements = null;
+                }
+                else
+                {
+                    All_Elements = Project.Scheme[Select_Scheme].Elements;
+                }
+            }
         }
 
 
@@ -124,36 +168,83 @@ namespace РГР.ViewModels
 
         public void DeleteElement()
         {
-            ObservableCollection<Full_Elements> tempCollection = this.All_Elements;
+            ObservableCollection<Full_Elements> tempCollection = Project.Scheme[Select_Scheme].Elements;
 
             for (int i = tempCollection.Count - 1; i >= 0; i--)
             {
-                if (tempCollection[i] is Class_Line tempLine)
+                if (tempCollection[i] is Full_Elements tempElement)
                 {
-                    if (tempLine == this.Selected_Element)
+                    if (tempElement is Class_Line tempLine)
                     {
-                        this.All_Elements.RemoveAt(i);
-                    }
-                    if (tempLine.FirstElement != null)
-                    {
-                        if (tempLine.FirstElement == this.Selected_Element)
+                        if (tempLine == Selected_Element)
                         {
-                            this.All_Elements.RemoveAt(i);
+                            int index1 = 0, index2 = 0;
+
+                            for (int j = 0; j < 8; j++)
+                            {
+                                if (tempLine.Ins[j] != null)
+                                {
+                                    tempLine.Ins[j].Element_of_Collection.Outs[j] = null;
+                                    index1 = j;
+                                }
+
+                                if (tempLine.Outs[j] != null)
+                                {
+                                    tempLine.Outs[j].Element_of_Collection.Ins[j] = null;
+                                    index2 = j;
+                                }
+                            }
+
+                            Power(tempLine.Outs[index2].Element_of_Collection);
+                            tempLine.Ins[index1] = null;
+                            tempLine.Outs[index2] = null;
+                            Project.Scheme[Select_Scheme].Elements.RemoveAt(i);
+                            break;
+                        }
+                        else
+                        {
+                            if (tempLine.FirstElement == Selected_Element || tempLine.SecondElement == Selected_Element)
+                            {
+                                for (int j = 0; j < 8; j++)
+                                {
+                                    if (tempLine.Ins[j] != null)
+                                    {
+                                        tempLine.Ins[j] = null;
+                                    }
+
+                                    if (tempLine.Outs[j] != null)
+                                    {
+                                        tempLine.Outs[j] = null;
+                                    }
+                                }
+
+                                Project.Scheme[Select_Scheme].Elements.RemoveAt(i);
+                            }
                         }
                     }
-                    if (tempLine.SecondElement != null)
+                    else
                     {
-                        if (tempLine.SecondElement == this.Selected_Element)
+                        if (tempElement == Selected_Element)
                         {
-                            this.All_Elements.RemoveAt(i);
+                            for (int j = 0; j < 8; j++)
+                            {
+                                if (tempElement.Ins[j] != null)
+                                {
+                                    tempElement.Ins[j].Element_of_Collection.Outs[tempElement.Ins[j].Number] = null;
+                                    tempElement.Ins[j] = null;
+                                }
+
+                                if (tempElement.Outs[j] != null)
+                                {
+                                    tempElement.Outs[j].Element_of_Collection.Ins[tempElement.Outs[j].Number] = null;
+                                    Power(tempElement.Outs[j].Element_of_Collection);
+                                    tempElement.Outs[j] = null;
+                                }
+                            }
+
+                            Project.Scheme[Select_Scheme].Elements.RemoveAt(i);
+                            break;
                         }
-                    }
-                }
-                else if (tempCollection[i] is Full_Elements tempElement)
-                {
-                    if (tempElement == this.Selected_Element)
-                    {
-                        this.All_Elements.RemoveAt(i);
                     }
                 }
             }
@@ -170,6 +261,18 @@ namespace РГР.ViewModels
             All_Elements = new ObservableCollection<Full_Elements>(xmlCollectionLoader.Load(path));
             Class_Line templines = new Class_Line();
             templines.CheckLines(All_Elements);
+        }
+
+        public void Power(Full_Elements element)
+        {
+            element.Meaning();
+            for (int i = 0; i < 8; i++)
+            {
+                if (element.Outs[i] != null)
+                {
+                    Power(element.Outs[i].Element_of_Collection);
+                }
+            }
         }
 
     }

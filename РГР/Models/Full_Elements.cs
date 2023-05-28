@@ -11,7 +11,12 @@ namespace РГР.Models
     public class Full_Elements : AbstractNotifyPropertyChanged
     {
         protected Avalonia.Point main_point;
-        private int output1, output2;
+        private int[] inputs = new int[8];
+        private int[] outputs = new int[8];
+        private int value_el;
+        private int output;
+        private Class_Elements[] ins = new Class_Elements[8];
+        private Class_Elements[] outs = new Class_Elements[8];
         private string name;
         public Avalonia.Point Main_Point
         {
@@ -39,15 +44,38 @@ namespace РГР.Models
             set => SetAndRaise(ref name, value);
         }
 
-        public int Output1 //S
+        public virtual void Meaning() { }
+
+        public int[] Inputs
         {
-            get => output1;
-            set=> SetAndRaise(ref output1, value);
+            get => inputs;
         }
-        public int Output2 //P0
+
+        public int[] Outputs
         {
-            get => output2;
-            set => SetAndRaise(ref output2, value);
+            get => outputs;
+        }
+
+        public int Value_El
+        {
+            get => value_el;
+            set => SetAndRaise(ref value_el, value);
+        }
+
+        public int Output
+        {
+            get => output;
+            set => SetAndRaise(ref output, value);
+        }
+
+        public Class_Elements[] Ins
+        {
+            get => ins;
+        }
+
+        public Class_Elements[] Outs
+        {
+            get => outs;
         }
 
         public event EventHandler<Class_CheckChanges> ChangeMainPoint;

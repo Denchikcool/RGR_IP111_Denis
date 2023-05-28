@@ -6,12 +6,12 @@ namespace РГР.Views.Elements
 {
     public class Element_Out : TemplatedControl
     {
-        public static readonly StyledProperty<string> statusProperty = AvaloniaProperty.Register<Element_Out, string>("status");
+        public static readonly StyledProperty<string> Value_ElProperty = AvaloniaProperty.Register<Element_Out, string>("Value_El");
 
-        public string status
+        public string Value_El
         {
-            get => GetValue(statusProperty);
-            set => SetValue(statusProperty, value);
+            get => GetValue(Value_ElProperty);
+            set => SetValue(Value_ElProperty, value);
         }
     }
 }

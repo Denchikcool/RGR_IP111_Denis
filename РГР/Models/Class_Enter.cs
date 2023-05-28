@@ -10,7 +10,9 @@ namespace РГР.Models
     {
        public Class_Enter() : base() 
        {
-            Output1 = 0;
+            Outputs[0] = 0;
+            Value_El = 1;
+            Output = 0;
        }
     }
 }

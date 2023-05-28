@@ -8,23 +8,33 @@ namespace РГР.Models
 {
     public class Class_Not : Full_Elements
     {
-        public int input1;
-
-        public int Input1
+        public override void Meaning()
         {
-            get => input1;
-            set => SetAndRaise(ref input1, value);
-        }
-
-        public void Value_Not()
-        {
-            if (Input1 == 0)
+            if (Ins[0] != null)
             {
-                Output1 = 1;
+                Inputs[0] = Ins[0].Element_of_Collection.Outputs[Ins[0].Number];
+                Value_El = Ins[0].Element_of_Collection.Value_El;
+
+                if (Value_El != 0)
+                {
+                    if (Inputs[0] == 0)
+                    {
+                        Outputs[0] = 1;
+                    }
+                    else if (Inputs[0] == 1)
+                    {
+                        Outputs[0] = 0;
+                    }
+                }
+                else
+                {
+                    Outputs[0] = 0;
+                }
             }
-            else if (Input1 == 1)
+            else
             {
-                Output1 = 0;
+                Outputs[0] = 0;
+                Value_El = 0;
             }
         }
     }

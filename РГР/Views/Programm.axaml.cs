@@ -4,12 +4,15 @@ using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.VisualTree;
+using DynamicData;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using РГР.Models;
 using РГР.ViewModels;
+using РГР.Views.Elements;
 
 namespace РГР.Views
 {
@@ -26,6 +29,8 @@ namespace РГР.Views
             InitializeComponent();
             DataContext = new ProgrammViewModel();
         }
+
+        public object InElements { get; set; }
 
         public void Exit_programm2(object? sender, CancelEventArgs e)
         {
@@ -53,15 +58,39 @@ namespace РГР.Views
             }
         }
 
+        public void MadeScheme(object sender, RoutedEventArgs eventArgs)
+        {
+            if(DataContext is ProgrammViewModel programmViewModel)
+            {
+                programmViewModel.Project.Scheme.Add(new Class_Scheme());
+            }
+        }
+
+        public void DestroyScheme(object sender, RoutedEventArgs eventArgs)
+        {
+            if(DataContext is ProgrammViewModel programmViewModel)
+            {
+                if(programmViewModel.Project.Scheme.Count > 0)
+                {
+                    programmViewModel.Project.Scheme.RemoveAt(programmViewModel.Select_Scheme);
+                }
+            }
+        }
+
+
         public void PointerPressedOnCanvas(object? sender, PointerPressedEventArgs pointerPressedEventArgs)
         {
             pointPointerPressed = pointerPressedEventArgs.GetPosition(this.GetVisualDescendants().OfType<Canvas>().FirstOrDefault());
 
             if(DataContext is ProgrammViewModel programm)
             {
+                if(programm.Project.Scheme.Count == 0)
+                {
+                    return;
+                }
                 if(programm.Button_Number == 1) 
                 {
-                    programm.All_Elements.Add(new Class_And { 
+                    programm.Project.Scheme[programm.Select_Scheme].Elements.Add(new Class_And { 
                         Main_Point = pointPointerPressed, 
                         Name = $"element_and{counter_and}",
                     });
@@ -69,7 +98,7 @@ namespace РГР.Views
                 }
                 else if (programm.Button_Number == 2)
                 {
-                    programm.All_Elements.Add(new Class_Or { 
+                    programm.Project.Scheme[programm.Select_Scheme].Elements.Add(new Class_Or { 
                         Main_Point = pointPointerPressed,
                         Name = $"element_or{counter_or}",
                     });
@@ -77,7 +106,7 @@ namespace РГР.Views
                 }
                 else if (programm.Button_Number == 3)
                 {
-                    programm.All_Elements.Add(new Class_Not { 
+                    programm.Project.Scheme[programm.Select_Scheme].Elements.Add(new Class_Not { 
                         Main_Point = pointPointerPressed,
                         Name = $"element_not{counter_not}",
                     });
@@ -85,7 +114,7 @@ namespace РГР.Views
                 }
                 else if (programm.Button_Number == 4)
                 {
-                    programm.All_Elements.Add(new Class_XoR { 
+                    programm.Project.Scheme[programm.Select_Scheme].Elements.Add(new Class_XoR { 
                         Main_Point = pointPointerPressed,
                         Name = $"element_xor{counter_xor}"
                     });
@@ -93,7 +122,7 @@ namespace РГР.Views
                 }
                 else if (programm.Button_Number == 5)
                 {
-                    programm.All_Elements.Add(new Class_Enter { 
+                    programm.Project.Scheme[programm.Select_Scheme].Elements.Add(new Class_Enter { 
                         Main_Point = pointPointerPressed,
                         Name = $"element_enter{counter_enter}"
                     });
@@ -101,7 +130,7 @@ namespace РГР.Views
                 }
                 else if (programm.Button_Number == 6)
                 {
-                    programm.All_Elements.Add(new Class_Out { 
+                    programm.Project.Scheme[programm.Select_Scheme].Elements.Add(new Class_Out { 
                         Main_Point = pointPointerPressed,
                         Name = $"element_out{counter_out}"
                     });
@@ -109,7 +138,7 @@ namespace РГР.Views
                 }
                 else if (programm.Button_Number == 7)
                 {
-                    programm.All_Elements.Add(new Class_HalfSum { 
+                    programm.Project.Scheme[programm.Select_Scheme].Elements.Add(new Class_HalfSum { 
                         Main_Point = pointPointerPressed,
                         Name = $"element_halfsum{counter_halfsum}"
                     });
@@ -156,10 +185,45 @@ namespace РГР.Views
                     }
                     else if(pointerPressedEventArgs.Source is Ellipse ellipse)
                     {
+                        int index = (int)Char.GetNumericValue(ellipse.Name[ellipse.Name.Length - 1]);
                         startPoint = pointerPressedEventArgs.GetPosition(this.GetVisualDescendants().OfType<Canvas>().FirstOrDefault());
-                        programm.All_Elements.Add(new Class_Line { StartPoint = startPoint, EndPoint = startPoint, FirstElement = ellipse.DataContext as Full_Elements, Name1 = Name });
+
+                        if (ellipse.Name.Contains("out"))
+                        {
+                            Class_Line l = new Class_Line
+                            {
+                                StartPoint = startPoint,
+                                EndPoint = startPoint,
+                                FirstElement = ellipse.DataContext as Full_Elements,
+                                SecondElement = null,
+                            };
+
+                            l.Ins[index] = new Class_Elements { Element_of_Collection = ellipse.DataContext as Full_Elements };
+
+                            programm.Project.Scheme[programm.Select_Scheme].Elements.Add(l);
+                        }
+                        else
+                        {
+                            Class_Line l = new Class_Line
+                            {
+                                StartPoint = startPoint,
+                                EndPoint = startPoint,
+                                FirstElement = ellipse.DataContext as Full_Elements,
+                                SecondElement = null,
+                            };
+
+                            l.Outs[index] = new Class_Elements { Element_of_Collection = ellipse.DataContext as Full_Elements };
+
+                            programm.Project.Scheme[programm.Select_Scheme].Elements.Add(l);
+                        }
+
                         this.PointerMoved += PointerMoveDrawLine;
                         this.PointerReleased += PointerPressedReleasedDrawLine;
+
+                        //startPoint = pointerPressedEventArgs.GetPosition(this.GetVisualDescendants().OfType<Canvas>().FirstOrDefault());
+                        //programm.All_Elements.Add(new Class_Line { StartPoint = startPoint, EndPoint = startPoint, FirstElement = ellipse.DataContext as Full_Elements, Name1 = Name });
+                        //this.PointerMoved += PointerMoveDrawLine;
+                        //this.PointerReleased += PointerPressedReleasedDrawLine;
                     }
                 }
             }
@@ -172,11 +236,36 @@ namespace РГР.Views
                 var src = e.Source;
                 if (src == null) return;
 
-                if (e.Source is Rectangle rect)
+                if (src is Rectangle rect)
                 {
-                    if (rect.DataContext is Class_Enter rectIn)
+                    if (rect.DataContext is Class_Enter element)
                     {
-                        rectIn.Output1 ^= 1;
+                        element.Outputs[0] ^= 1;
+                        element.Output ^= 1;
+
+                        viewModel.Power(element);
+                    }
+                }
+            }
+        }
+
+        public void DoubleTapOnCanvas2(object? sender, RoutedEventArgs e)
+        {
+            if (DataContext is ProgrammViewModel viewModel)
+            {
+                if (e.Source is TextBlock textBlock)
+                {
+                    if (textBlock.DataContext is Class_Scheme scheme)
+                    {
+                        Class_Scheme? circuitPtr = scheme;
+                        Element_DifferName? changeNameWindow = new Element_DifferName(circuitPtr);
+                        changeNameWindow.ShowDialog(this);
+                    }
+                    else if (textBlock.DataContext is Class_Projects project)
+                    {
+                        Class_Projects? projectPtr = project;
+                        Element_DifferName? changeNameWindow = new Element_DifferName(projectPtr);
+                        changeNameWindow.ShowDialog(this);
                     }
                 }
             }
@@ -214,7 +303,7 @@ namespace РГР.Views
             if (DataContext is ProgrammViewModel viewModel)
             {
                 Debug.WriteLine(sender);
-                Class_Line connector = viewModel.All_Elements[viewModel.All_Elements.Count - 1] as Class_Line;
+                Class_Line connector = viewModel.Project.Scheme[viewModel.Select_Scheme].Elements[viewModel.Project.Scheme[viewModel.Select_Scheme].Elements.Count - 1] as Class_Line;
                 Point currentPointerPosition = pointerEventArgs.GetPosition(this.GetVisualDescendants().OfType<Canvas>().FirstOrDefault());
 
                 connector.EndPoint = new Point(
@@ -233,20 +322,75 @@ namespace РГР.Views
             var coords = pointerReleasedEventArgs.GetPosition(canvas);
 
             var element = canvas.InputHitTest(coords);
-            ProgrammViewModel viewModel = DataContext as ProgrammViewModel;
-
-            if (element is Ellipse ellipse)
+            if (DataContext is ProgrammViewModel viewModel)
             {
-                
-                if (ellipse.DataContext is Full_Elements full_element)
+                if (element is Ellipse ellipse)
                 {
-                    Class_Line connector = viewModel.All_Elements[viewModel.All_Elements.Count - 1] as Class_Line;
-                    connector.SecondElement = full_element;
-                    return;
-                }
-            }
+                    if (ellipse.DataContext is Full_Elements element1)
+                    {
+                        if (viewModel.Project.Scheme[viewModel.Select_Scheme].Elements[viewModel.Project.Scheme[viewModel.Select_Scheme].Elements.Count - 1] is Class_Line line)
+                        {
+                            if (line.FirstElement != element)
+                            {
+                                int index2 = (int)Char.GetNumericValue(ellipse.Name[ellipse.Name.Length - 1]);
+                                int hasElement = 0;
 
-            viewModel.All_Elements.RemoveAt(viewModel.All_Elements.Count - 1);
+                                line.SecondElement = element1;
+
+                                for (int i = 0; i < 8; i++)
+                                {
+                                    if (line.Ins[i] != null)
+                                    {
+                                        hasElement = 1;
+                                        break;
+                                    }
+                                }
+
+                                if (hasElement != 0)
+                                {
+                                    for (int index1 = 0; index1 < 8; index1++)
+                                    {
+                                        if (line.Ins[index1] != null)
+                                        {
+                                            line.Ins[index1].Number = index2;
+                                            line.Outs[index2] = new Class_Elements { Element_of_Collection = element1, Number = index1 };
+
+                                            line.Ins[index1].Element_of_Collection.Outs[index1] = new Class_Elements {Element_of_Collection = element1, Number = index2 };
+                                            line.Outs[index2].Element_of_Collection.Ins[index2] = new Class_Elements { Element_of_Collection = line.Ins[index1].Element_of_Collection, Number = index1 };
+
+                                            viewModel.Power(line.Ins[index1].Element_of_Collection);
+
+                                            break;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    for (int index1 = 0; index1 < 8; index1++)
+                                    {
+                                        if (line.Outs[index1] != null)
+                                        {
+                                            line.Outs[index1].Number = index2;
+                                            line.Ins[index2] = new Class_Elements { Element_of_Collection = element1, Number = index1 };
+
+                                            line.Outs[index1].Element_of_Collection.Ins[index1] = new Class_Elements { Element_of_Collection = element1, Number = index2 };
+                                            line.Ins[index2].Element_of_Collection.Outs[index2] = new Class_Elements { Element_of_Collection = line.Outs[index1].Element_of_Collection, Number = index1 };
+
+                                            viewModel.Power(line.Ins[index2].Element_of_Collection);
+
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                return;
+                            }
+                        }
+                    }
+                }
+
+                viewModel.Project.Scheme[viewModel.Select_Scheme].Elements.RemoveAt(viewModel.Project.Scheme[viewModel.Select_Scheme].Elements.Count - 1);
+            }
         }
 
         public async void SaveFile(object sender, RoutedEventArgs args)

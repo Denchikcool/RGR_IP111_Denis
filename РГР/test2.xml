@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<collection>
+  <class_enter>
+    <start>123, 157</start>
+    <name>element_enter1</name>
+  </class_enter>
+  <class_enter>
+    <start>120, 259</start>
+    <name>element_enter2</name>
+  </class_enter>
+  <class_enter>
+    <start>114, 344</start>
+    <name>element_enter3</name>
+  </class_enter>
+  <class_out>
+    <start>807, 209</start>
+    <name>element_out0</name>
+  </class_out>
+  <class_or>
+    <start>271, 127</start>
+    <name>element_or0</name>
+  </class_or>
+  <class_or>
+    <start>262, 319</start>
+    <name>element_or1</name>
+  </class_or>
+  <line>
+    <start>284, 153</start>
+    <end>160, 186</end>
+    <firstElement>РГР.Models.Class_Or</firstElement>
+    <secondElement>РГР.Models.Class_Enter</secondElement>
+    <name1>element_or0</name1>
+    <name2>element_enter1</name2>
+  </line>
+  <line>
+    <start>160, 287</start>
+    <end>274, 328</end>
+    <firstElement>РГР.Models.Class_Enter</firstElement>
+    <secondElement>РГР.Models.Class_Or</secondElement>
+    <name1>element_enter2</name1>
+    <name2>element_or1</name2>
+  </line>
+  <line>
+    <start>153, 373</start>
+    <end>272, 344</end>
+    <firstElement>РГР.Models.Class_Enter</firstElement>
+    <secondElement>РГР.Models.Class_Or</secondElement>
+    <name1>element_enter3</name1>
+    <name2>element_or1</name2>
+  </line>
+  <class_enter>
+    <start>120, 78</start>
+    <name>element_enter4</name>
+  </class_enter>
+  <class_xor>
+    <start>517, 226</start>
+    <name>element_xor0</name>
+  </class_xor>
+  <line>
+    <start>304, 333</start>
+    <end>529, 250</end>
+    <firstElement>РГР.Models.Class_Or</firstElement>
+    <secondElement>РГР.Models.Class_XoR</secondElement>
+    <name1>element_or1</name1>
+    <name2>element_xor0</name2>
+  </line>
+  <line>
+    <start>314, 141</start>
+    <end>529, 234</end>
+    <firstElement>РГР.Models.Class_Or</firstElement>
+    <secondElement>РГР.Models.Class_XoR</secondElement>
+    <name1>element_or0</name1>
+    <name2>element_xor0</name2>
+  </line>
+  <line>
+    <start>563, 241</start>
+    <end>813, 237</end>
+    <firstElement>РГР.Models.Class_XoR</firstElement>
+    <secondElement>РГР.Models.Class_Out</secondElement>
+    <name1>element_xor0</name1>
+    <name2>element_out0</name2>
+  </line>
+  <line>
+    <start>160, 105</start>
+    <end>282, 136</end>
+    <firstElement>РГР.Models.Class_Enter</firstElement>
+    <secondElement>РГР.Models.Class_Or</secondElement>
+    <name1>element_enter4</name1>
+    <name2>element_or0</name2>
+  </line>
+</collection>

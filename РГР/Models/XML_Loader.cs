@@ -118,9 +118,9 @@ namespace РГР.Models
                 {
                     return loadCollection;
                 }
-                else return new List<Full_Elements>();
+                else return new ObservableCollection<Full_Elements>();
             }
-            return new List<Full_Elements>();
+            return new ObservableCollection<Full_Elements>();
         }
     }
 }

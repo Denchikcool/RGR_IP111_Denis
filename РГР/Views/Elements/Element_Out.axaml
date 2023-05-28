@@ -16,10 +16,10 @@
               <TextBlock Text=" " HorizontalAlignment="Center" FontSize="6" />
               <TextBlock Text="OUTPUT" FontSize="6" HorizontalAlignment="Center"/>
               <TextBlock Text=" " HorizontalAlignment="Center" FontSize="6" />
-              <TextBlock HorizontalAlignment="Center" Text="{TemplateBinding status}"/>
+              <TextBlock HorizontalAlignment="Center" Text="{TemplateBinding Value_El}"/>
             </StackPanel>
           </Border>
-          <Ellipse Name="in1" Height="7" Width="7" Fill="Gray" Canvas.Top="25" Canvas.Left="3"/>
+          <Ellipse Name="in0" Height="7" Width="7" Fill="Gray" Canvas.Top="25" Canvas.Left="3"/>
         </Canvas>
       </ControlTemplate>
     </Setter>
