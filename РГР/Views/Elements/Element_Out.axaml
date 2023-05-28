@@ -1,0 +1,27 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:РГР.Views.Elements">
+  <Design.PreviewWith>
+    <controls:Element_Out />
+  </Design.PreviewWith>
+
+  <Style Selector="controls|Element_Out">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Canvas Width="50" Height="56" Background="Transparent">
+          <Rectangle  Width="30" Height="50" Canvas.Left="9" Canvas.Top="3" Fill="Transparent"/>
+          <Border ClipToBounds="True" BorderBrush="Black" BorderThickness="1" Width="30" Height="50" Canvas.Left="9" Canvas.Top="3">
+            <StackPanel Height="{Binding $parent[Border].Height}">
+              <TextBlock Text=" " HorizontalAlignment="Center" FontSize="6" />
+              <TextBlock Text="OUTPUT" FontSize="6" HorizontalAlignment="Center"/>
+              <TextBlock Text=" " HorizontalAlignment="Center" FontSize="6" />
+              <TextBlock HorizontalAlignment="Center" Text="{TemplateBinding Value_El}"/>
+            </StackPanel>
+          </Border>
+          <Ellipse Name="in0" Height="7" Width="7" Fill="Gray" Canvas.Top="25" Canvas.Left="3"/>
+        </Canvas>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

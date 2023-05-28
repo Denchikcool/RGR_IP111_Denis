@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<collection>
+  <class_and>
+    <start>168, 109</start>
+    <name>element_and0</name>
+  </class_and>
+  <class_and>
+    <start>167, 231</start>
+    <name>element_and1</name>
+  </class_and>
+  <class_or>
+    <start>312, 163</start>
+    <name>element_or0</name>
+  </class_or>
+  <line>
+    <start>206, 121</start>
+    <end>324, 172</end>
+    <firstElement>РГР.Models.Class_And</firstElement>
+    <secondElement>РГР.Models.Class_Or</secondElement>
+    <name1>element_and0</name1>
+    <name2>element_or0</name2>
+  </line>
+  <line>
+    <start>204, 244</start>
+    <end>323, 188</end>
+    <firstElement>РГР.Models.Class_And</firstElement>
+    <secondElement>РГР.Models.Class_Or</secondElement>
+    <name1>element_and1</name1>
+    <name2>element_or0</name2>
+  </line>
+</collection>
